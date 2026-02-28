@@ -7,12 +7,6 @@ const mongoose = require("mongoose");
 
 // Signup
 router.post("/register", async (req, res) => {
-  if (mongoose.connection.readyState !== 1) {
-    return res.status(503).json({
-      msg: "Database not connected. Please check your MONGODB_URI/Internet.",
-      error: "DB_CONNECTION_FAILED",
-    });
-  }
   try {
     const { username, email, password } = req.body;
     let user = await User.findOne({ email });
@@ -49,12 +43,6 @@ router.post("/register", async (req, res) => {
 
 // Login
 router.post("/login", async (req, res) => {
-  if (mongoose.connection.readyState !== 1) {
-    return res.status(503).json({
-      msg: "Database not connected. Please check your MONGODB_URI/Internet.",
-      error: "DB_CONNECTION_FAILED",
-    });
-  }
   try {
     const { email, password } = req.body;
     let user = await User.findOne({ email });
